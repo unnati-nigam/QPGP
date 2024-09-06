@@ -14,7 +14,7 @@ theta=5
 omega=0.8
 n=k*p
 sig2=3
-p_search=10#(p-5):(p+5)
+p_search=(p-5):(p+5)
 
 iter=2
 PAR=matrix(,nrow=iter,ncol=4)
