@@ -14,7 +14,6 @@ sig2=1
 omega=0.5
 p_search=10
 
-accuracy=c()
 run=100
 k_grid=c(10,100,1000,10000)#seq(100,1000,by=100)
 w=matrix(NA,nrow=length(k_grid),ncol=run)
@@ -23,7 +22,6 @@ th=matrix(NA,nrow=length(k_grid),ncol=run)
 sig2m=matrix(NA,nrow=length(k_grid),ncol=run)
 
 
-#print(date())
 for (i in 1:length(k_grid))
 {
   start=Sys.time()
@@ -46,7 +44,6 @@ for (i in 1:length(k_grid))
   end=Sys.time()
  print(end-start)
 }
-
 
 apply(w,1,mean)
 apply(w,1,sd)
