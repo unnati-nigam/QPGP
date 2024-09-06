@@ -6,18 +6,15 @@ source_files <- function(directory) {
 }
 
 #set the directory to where you have saved the folder
-setwd("C:/Users/Unnati Nigam/Desktop/U/Unnati Nigam/PhD Notes/Research/Quasi-Periodic GP/ICASSP 2025/GitHub QPGP R codes - Copy")
 source_files("basics")
 
 p=10
 theta=5
 sig2=1
 omega=0.5
-p_search=10#(p-5):(p+5)
+p_search=10
 
 accuracy=c()
-#k_grid=seq(100,1000,by=100)
-#k_grid=seq(10,100,by=10)
 run=100
 k_grid=c(10,100,1000,10000)#seq(100,1000,by=100)
 w=matrix(NA,nrow=length(k_grid),ncol=run)
