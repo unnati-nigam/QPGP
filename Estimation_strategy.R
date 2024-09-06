@@ -9,7 +9,7 @@ source_files <- function(directory) {
 source_files("basics")
 
 p=10
-k=10
+k=1000
 theta=5
 omega=0.8
 n=k*p
