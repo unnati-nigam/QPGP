@@ -6,7 +6,6 @@ source_files <- function(directory) {
 }
 
 #set the directory to where you have saved the folder
-setwd("C:/Users/Unnati Nigam/Desktop/U/Unnati Nigam/PhD Notes/Research/Quasi-Periodic GP/ICASSP 2025/GitHub QPGP R codes - Copy")
 source_files("basics")
 
 p=10
