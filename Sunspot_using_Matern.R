@@ -28,8 +28,8 @@ R_m=sig2*toeplitz(matern_cov(0:(p-1),nu,ell))
 diag(R_m)=rep(sig2,p)
 
 y_pred=mean(y)+pred_element(n,p,w,R_m,res)
-plot(x[1:288],y[1:288],'l',ylab="No. of sunspots", xlab="Year",ylim=c(-10,210))
-lines(x[(t+1):288],y_pred[(t+1):288],col=2)
+plot(x[1:289],y[1:289],'l',ylab="No. of sunspots", xlab="Year",ylim=c(-10,210))
+lines(x[(t+1):289],y_pred[(t+1):289],col=2)
 
 
 test=y[(t+1):289]
