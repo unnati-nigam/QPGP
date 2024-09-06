@@ -16,7 +16,7 @@ n=k*p
 sig2=3
 p_search=(p-5):(p+5)
 
-iter=2
+iter=100
 PAR=matrix(,nrow=iter,ncol=4)
 for(j in 1:iter)
 {
