@@ -8,6 +8,7 @@ source_files <- function(directory) {
 }
 
 #set the directory to where you have saved the folder
+setwd("C:/Users/Unnati Nigam/Desktop/U/Unnati Nigam/PhD Notes/Research/Quasi-Periodic GP/ICASSP 2025/QPGP_GitHub")
 source_files("basics")
 
 y=as.numeric(sunspot.year)
@@ -26,38 +27,58 @@ sig2=a[1]
 nu=a[2]
 ell=a[3]
 
-R_m=sig2*toeplitz(matern_cov(0:(p-1),nu,ell))
-diag(R_m)=rep(sig2,p)
+R_ma=sig2*toeplitz(matern_cov(0:(p-1),nu,ell))
+diag(R_ma)=rep(sig2,p)
 
-y_pred=mean(y)+pred_element(n,p,w,R_m,res)
+b=mackay_th_sig2_est(t,par$p,par$R,res)
+theta=b[1]
+sig2=b[2]
 
-p_var=pred_var(n,p,w,R_m,res)
-p_sd=sqrt(p_var)
+R_mb=sig2*toeplitz(exp(-theta^2*(sin(pi*(0:(p-1))/p))^2))
 
-pred=y_pred
-lower=y_pred-2*p_sd
-upper=y_pred+2*p_sd
+y_pred_a=mean(y)+pred_element(n,p,w,R_ma,res)
+
+y_pred_b=mean(y)+pred_element(n,p,w,R_mb,res)
+
+#p_var=pred_var(n,p,w,R_m,res)
+#p_sd=sqrt(p_var)
+
+#pred=y_pred
+#lower=y_pred-2*p_sd
+#upper=y_pred+2*p_sd
 
 full_data <- data.frame(
-  x = x,
-  y = y
+  x = x[201:289],
+  y = y[201:289]
 )
 
 # Data frame for the last 58 points (with estimates and CIs)
-ci_data <- data.frame(
+est_data <- data.frame(
   x = x[231:289],
-  estimate = y_pred[231:289],
-  lower = lower[231:289],
-  upper = upper[231:289]
+  #estimate = y_pred[231:289],
+  #lower = lower[231:289],
+  #upper = upper[231:289]
+  a_est=y_pred_a[231:289],
+  b_est=y_pred_b[231:289]
 )
 
 library(ggplot2)
-
 ggplot() +
-  geom_line(data = full_data, aes(x = x, y = y)) +  # Line for the full dataset
-  geom_ribbon(data = ci_data, aes(x = x, ymin = lower, ymax = upper), alpha = 0.2) +  # Shaded CIs for last 58 points
-  geom_line(data = ci_data, aes(x = x, y = estimate), color = "red") +  # Estimates line for last 58 points
-  #geom_point(data = ci_data, aes(x = x, y = estimate), color = "blue") +  # Estimates points for last 58 points
-  labs(x = "Year", y = "No. of sunspots") +
-  theme_minimal()
-
+  geom_line(data = full_data, aes(x = x, y = y, color = "Sunspots")) +  # Line for the full dataset
+  geom_line(data = est_data, aes(x = x, y = a_est, color = "QPGP using Periodic Matern kernel")) +  # Estimates line for last 58 points
+  geom_line(data = est_data, aes(x = x, y = b_est, color = "QPGP using Periodic MacKay's kernel")) +  # Estimates line for last 58 points
+  labs(x = "Year", y = "No. of sunspots", color = "Legend") +  # Adding a label for the legend
+  scale_color_manual(
+    values = c("Sunspots" = "black", 
+               "QPGP using Periodic Matern kernel" = "red", 
+               "QPGP using Periodic MacKay's kernel" = "blue"),
+    breaks = c("Sunspots", "QPGP using Periodic Matern kernel", "QPGP using Periodic MacKay's kernel")  # Ensuring the legend order
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = c(0.05, 0.95),  # Place legend in the top-left corner
+    legend.justification = c("left", "top"),  # Align legend to the top-left corner
+    legend.title = element_text(size = 10),  # Adjust legend title size
+    legend.text = element_text(size = 8),   # Adjust legend text size
+    legend.key.size = unit(0.5, "cm")       # Adjust the size of the legend keys
+  )
