@@ -24,7 +24,7 @@ pred_var=function(n,p,w,R,X)
     }
     else
     {
-      v=(w^2)*(R[l,l])/(1-w^2)+(R_star_t%*%t(R_inv)%*%R_star)/(1-w^2)
+      v=(R_star_t%*%t(R_inv)%*%R_star)/(1-w^2)#+(w^2)*(R[l,l])/(1-w^2)+
     }
     
     var[j]=as.numeric(v)
