@@ -14,7 +14,7 @@ theta=5
 omega=0.8
 n=k*p
 sig2=3
-p_search=(p-5):(p+5)
+p_search=10
 
 iter=100
 PAR=matrix(,nrow=iter,ncol=4)
@@ -35,9 +35,3 @@ sd(PAR[,2])
 sd(PAR[,3])
 table(PAR[,1])
 
-R_hat=par$R
-R=((th_sig2_est(n,par$p,par$R,y))[2])*toeplitz(exp(-(th_sig2_est(n,par$p,par$R,y))[1]^2*(sin(pi*(0:(par$p-1))/par$p))^2))
-e1=max(eigen(R_hat)$values)
-e2=max(eigen(R)$values)
-abs(e1-e2)
-e1/e2

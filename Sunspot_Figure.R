@@ -8,7 +8,6 @@ source_files <- function(directory) {
 }
 
 #set the directory to where you have saved the folder
-setwd("C:/Users/Unnati Nigam/Desktop/U/Unnati Nigam/PhD Notes/Research/Quasi-Periodic GP/ICASSP 2025/QPGP_GitHub")
 source_files("basics")
 
 y=as.numeric(sunspot.year)
@@ -40,13 +39,6 @@ y_pred_a=mean(y)+pred_element(n,p,w,R_ma,res)
 
 y_pred_b=mean(y)+pred_element(n,p,w,R_mb,res)
 
-#p_var=pred_var(n,p,w,R_m,res)
-#p_sd=sqrt(p_var)
-
-#pred=y_pred
-#lower=y_pred-2*p_sd
-#upper=y_pred+2*p_sd
-
 full_data <- data.frame(
   x = x[201:289],
   y = y[201:289]
@@ -55,9 +47,6 @@ full_data <- data.frame(
 # Data frame for the last 58 points (with estimates and CIs)
 est_data <- data.frame(
   x = x[231:289],
-  #estimate = y_pred[231:289],
-  #lower = lower[231:289],
-  #upper = upper[231:289]
   a_est=y_pred_a[231:289],
   b_est=y_pred_b[231:289]
 )

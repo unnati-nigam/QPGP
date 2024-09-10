@@ -14,6 +14,7 @@ sig2=1
 omega=0.5
 p_search=10
 
+accuracy=c()
 run=100
 k_grid=c(10,100,1000,10000)#seq(100,1000,by=100)
 w=matrix(NA,nrow=length(k_grid),ncol=run)
@@ -34,7 +35,6 @@ for (i in 1:length(k_grid))
     set.seed(j)
     y=QPGPsim(n,p,theta,omega,sig2)
     par=par_est(n,p_search,y)
-  #print(j)
     w[i,j]=par$w
     pp[i,j]=par$p
     th[i,j]=(th_sig2_est(n,par$p,par$R,y))[1]
@@ -44,6 +44,7 @@ for (i in 1:length(k_grid))
   end=Sys.time()
  print(end-start)
 }
+
 
 apply(w,1,mean)
 apply(w,1,sd)
