@@ -4,11 +4,7 @@ close all;
 clear;
 clc;
 
-% Specify the filename
-filename = 'data_1k.xlsx';
 
-% Load data into a matrix
-data = readmatrix(filename);
 
 p=10;
 k=10^4;
@@ -37,8 +33,6 @@ for j = 1:iter
         rng(j);
         period=10;
         lob = [0 0.1 -0.9999];      upb = [0 15 0.9999];
-        %y=data(:,j);
-        %y=randQPGP(N,p,sigma,delta,theta,omega,@period_sin_gauss_cov);
         y=QPGPsim(N,p,theta,omega,sigma^2);
      %TSP   
         tic;
