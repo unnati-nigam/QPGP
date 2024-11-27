@@ -15,7 +15,7 @@ theta=5;
 omega=0.5;
 addpath('routine', 'routine/fastF0Nls');
 datetime('now')
-iter=100;
+iter=1000;
 
 w_tsp=zeros(1,iter);
 th_tsp=zeros(1,iter);
